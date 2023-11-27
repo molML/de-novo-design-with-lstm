@@ -87,11 +87,13 @@ def design_molecules(clm: keras.models.Sequential) -> List[str]:
     return designed_smiles
 
 
+# Read token-to-label mapping
 with open("data/token2label.json", "r") as f:
     TOKEN2LABEL = json.load(f)
 
 LABEL2TOKEN = {int(label): token for token, label in TOKEN2LABEL.items()}
 
+# Define hyperparameters
 VOCAB_SIZE = len(TOKEN2LABEL)
 EMBEDDING_DIM = 128
 TRAINING_LEN = 99
@@ -99,9 +101,10 @@ LSTM_SIZE = 128
 BATCH_SIZE = 256
 N_EPOCHS = 200
 
+# Read training and validation data
 X_train, y_train = input_preprocessing("train")
 X_val, y_val = input_preprocessing("val")
 
-clm = build_model()
-history = train_model(clm)
-designs = design_molecules(clm)
+clm = build_model()  # Build the chemical language model
+history = train_model(clm)  # Train the chemical language model
+designs = design_molecules(clm)  # Design molecules
