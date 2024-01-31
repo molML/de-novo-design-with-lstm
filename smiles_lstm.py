@@ -108,3 +108,6 @@ X_val, y_val = input_preprocessing("val")
 clm = build_model()  # Build the chemical language model
 history = train_model(clm)  # Train the chemical language model
 designs = design_molecules(clm)  # Design molecules
+
+with open("designs.txt", "w") as f:
+    f.write("\n".join(designs))  # Save designs to file
